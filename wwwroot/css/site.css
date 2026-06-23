@@ -149,9 +149,10 @@ body {
     height: 60vh;
     min-height: 320px;
     max-height: 620px;
-    object-fit: cover;
-    object-position: top center;
+    object-fit: contain;
+    object-position: center;
     display: block;
+    background: var(--dark-2);
 }
 
 /* carousel الصور */
@@ -166,9 +167,10 @@ body {
     height: 60vh;
     min-height: 320px;
     max-height: 620px;
-    object-fit: cover;
-    object-position: center top;
+    object-fit: contain;
+    object-position: center;
     display: block;
+    background: var(--dark);
 }
 
 /* أزرار التنقل */
