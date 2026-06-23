@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" rx="100" fill="#0A0A0A"/>
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#C9A84C" stroke-width="3"/>
+  <!-- F Letter -->
+  <text x="55" y="140" font-family="Georgia, serif" font-size="120" font-weight="bold" fill="#C9A84C">F</text>
+  <!-- Musical Note -->
+  <text x="120" y="130" font-family="Arial" font-size="40" fill="#C9A84C">♪</text>
+</svg>

@@ -1,0 +1,307 @@
+@using Fortissimo.Models
+@{
+    ViewData["Title"] = "الرئيسية";
+    var sliderImages = ViewBag.SliderImages as List<SliderImage> ?? new List<SliderImage>();
+    var upcomingEvents = ViewBag.UpcomingEvents as List<Event> ?? new List<Event>();
+}
+
+<!-- ===== HERO SLIDER ===== -->
+<section class="hero-slider">
+    @if (sliderImages.Any())
+    {
+        <div id="heroCarousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="5000">
+            <div class="carousel-indicators">
+                @for (int i = 0; i < sliderImages.Count; i++)
+                {
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@i"
+                            class="@(i == 0 ? "active" : "")" aria-label="Slide @(i + 1)"></button>
+                }
+            </div>
+            <div class="carousel-inner h-100">
+                @for (int i = 0; i < sliderImages.Count; i++)
+                {
+                    var img = sliderImages[i];
+                    <div class="carousel-item h-100 @(i == 0 ? "active" : "")">
+                        <div class="hero-slide-bg" style="background-image: url('@img.ImageUrl');">
+                            <div class="hero-slide-content animate__animated animate__fadeInUp">
+                                <h1>@img.Title</h1>
+                                <p>Fortissimo Music Academy</p>
+                                <div class="d-flex gap-3 justify-content-center">
+                                    <a asp-action="About" class="btn-gold px-4 py-2">
+                                        <i class="fas fa-music ms-1"></i> تعرف علينا
+                                    </a>
+                                    <a asp-action="Contact" class="btn-outline-gold px-4 py-2">
+                                        <i class="fas fa-phone ms-1"></i> تواصل معنا
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="hero-slide-bg d-flex align-items-center justify-content-center"
+             style="background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%); height:100%;">
+            <div class="hero-slide-content text-center">
+                <img src="/images/logo.svg" alt="Fortissimo" class="rounded-circle mb-4" style="width:120px;height:120px;border:3px solid var(--gold);" />
+                <h1 class="animate__animated animate__fadeInDown">مرحباً بكم في Fortissimo Music</h1>
+                <p class="animate__animated animate__fadeInUp">أكاديمية موسيقية متخصصة في تعليم البيانو والكلارنيت</p>
+                <div class="d-flex gap-3 justify-content-center animate__animated animate__fadeInUp">
+                    <a asp-action="About" class="btn-gold px-4 py-2">
+                        <i class="fas fa-music ms-1"></i> تعرف علينا
+                    </a>
+                    <a asp-action="Contact" class="btn-outline-gold px-4 py-2">
+                        <i class="fas fa-phone ms-1"></i> تواصل معنا
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+<!-- ===== WELCOME / STATS ===== -->
+<section class="section-dark">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="number">+500</div>
+                    <div class="label">طالب متخرج</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="number">+10</div>
+                    <div class="label">سنوات خبرة</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="number">+50</div>
+                    <div class="label">حفل موسيقي</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="stat-item">
+                    <div class="number">2</div>
+                    <div class="label">تخصص موسيقي</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== DR. SHERIN SHOKRY ===== -->
+<section class="section-darker">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-5 text-center">
+                <div class="founder-img-wrapper">
+                    <img src="/images/dr-sherin.jpg"
+                         alt="د. شيرين شكري"
+                         class="founder-img"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <div class="founder-img-placeholder" style="display:none;">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7" style="text-align:right;">
+                <p class="text-gold mb-1" style="letter-spacing:2px; font-size:0.9rem;">FOUNDER & DIRECTOR</p>
+                <h2 style="font-size:2.4rem; font-weight:900; color:#fff; margin-bottom:0.3rem;">
+                    د. شيرين شكري
+                </h2>
+                <div class="gold-divider mb-3" style="margin-right:0; margin-left:auto;"></div>
+                <p style="color:#ccc; line-height:2; font-size:1.05rem;">
+                    مؤسسة ومديرة أكاديمية Fortissimo للموسيقى، موسيقارة وأستاذة متخصصة في تعليم البيانو والكلارنيت، تحمل رؤية حقيقية لنشر الفن الموسيقي وتطوير المواهب في الكويت والعالم العربي.
+                </p>
+                <p style="color:#aaa; line-height:2;">
+                    بخبرة دولية وشغف حقيقي بالموسيقى الكلاسيكية، أسست د. شيرين Fortissimo لتكون بيتاً للإبداع الموسيقي وصرح تعليمي يُخرّج جيلاً من الموسيقيين المتميزين.
+                </p>
+                <div class="d-flex gap-3 mt-4 justify-content-start flex-wrap">
+                    <a asp-action="CV" class="btn-gold px-4 py-2">
+                        <i class="fas fa-user-tie ms-1"></i> السيرة الذاتية
+                    </a>
+                    <a asp-action="Contact" class="btn-outline-gold px-4 py-2">
+                        <i class="fas fa-envelope ms-1"></i> تواصل معها
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== VISION ===== -->
+<section class="section-dark">
+    <div class="container">
+        <div class="section-title">
+            <h2>رؤيتنا</h2>
+            <div class="gold-divider"></div>
+            <p>نؤمن بأن الموسيقى لغة الروح وجسر التواصل بين الشعوب</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="vision-card">
+                    <div class="vision-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h5 class="text-gold mb-2">رؤيتنا</h5>
+                    <p class="text-muted">أن نكون المرجع الأول في تعليم الموسيقى الكلاسيكية في مصر والعالم العربي، ونسهم في بناء جيل موسيقي متميز قادر على حمل الرسالة الفنية.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="vision-card">
+                    <div class="vision-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h5 class="text-gold mb-2">رسالتنا</h5>
+                    <p class="text-muted">تقديم تعليم موسيقي راقٍ يجمع بين الأصالة والمعاصرة، من خلال مناهج علمية متطورة وأساتذة متخصصين يُلهمون الطلاب ويكتشفون مواهبهم.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="vision-card">
+                    <div class="vision-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h5 class="text-gold mb-2">قيمنا</h5>
+                    <p class="text-muted">الإبداع والتميز والالتزام والشغف بالموسيقى. نؤمن بقدرة كل طالب على الوصول إلى أعلى مستويات الأداء الموسيقي بالتدريب والمثابرة.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== VIDEOS ===== -->
+<section class="section-dark">
+    <div class="container">
+        <div class="section-title">
+            <h2>لقطات موسيقية</h2>
+            <div class="gold-divider"></div>
+            <p>استمتع بأجمل اللحظات الموسيقية من Fortissimo Academy</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/TnmlnSXSk0s?rel=0&modestbranding=1"
+                                title="عزف البيانو - Fortissimo Music"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-card-body">
+                        <h4><i class="fas fa-music ms-2"></i> البيانو</h4>
+                        <p class="text-muted mb-0">فن العزف على البيانو - رحلة النغمات الخالدة</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/eSMiRcJLuiI?rel=0&modestbranding=1"
+                                title="عزف الكلارنيت - Fortissimo Music"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-card-body">
+                        <h4><i class="fas fa-wind ms-2"></i> الكلارنيت</h4>
+                        <p class="text-muted mb-0">سحر الكلارنيت - صوت يسكن القلوب</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== UPCOMING EVENTS ===== -->
+@if (upcomingEvents.Any())
+{
+    <section class="section-darker">
+        <div class="container">
+            <div class="section-title">
+                <h2>فعالياتنا القادمة</h2>
+                <div class="gold-divider"></div>
+                <p>لا تفوّت أجمل الفعاليات الموسيقية</p>
+            </div>
+            <div class="row g-4">
+                @foreach (var ev in upcomingEvents)
+                {
+                    <div class="col-md-4">
+                        <div class="event-card">
+                            @if (!string.IsNullOrEmpty(ev.ImageUrl))
+                            {
+                                <img src="@ev.ImageUrl" class="event-card-img" alt="@ev.Title" />
+                            }
+                            else
+                            {
+                                <div class="event-card-img-placeholder">
+                                    <i class="fas fa-music"></i>
+                                </div>
+                            }
+                            <div class="event-card-body">
+                                <div class="event-date-badge">
+                                    <i class="fas fa-calendar"></i>
+                                    @ev.EventDate.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("ar-EG"))
+                                </div>
+                                <h5>@ev.Title</h5>
+                                @if (!string.IsNullOrEmpty(ev.Description))
+                                {
+                                    <p class="text-muted small">@ev.Description</p>
+                                }
+                                @if (!string.IsNullOrEmpty(ev.Location))
+                                {
+                                    <div class="event-location">
+                                        <i class="fas fa-map-marker-alt text-gold ms-1"></i> @ev.Location
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="text-center mt-4">
+                <a asp-action="Events" class="btn-outline-gold px-4 py-2">
+                    <i class="fas fa-calendar-alt ms-1"></i> عرض كل الفعاليات
+                </a>
+            </div>
+        </div>
+    </section>
+}
+
+<!-- ===== GOOGLE MAP ===== -->
+<section class="section-dark map-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>موقعنا</h2>
+            <div class="gold-divider"></div>
+            <p>تفضل بزيارتنا في Fortissimo Music Academy</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="rounded overflow-hidden border" style="border-color: rgba(201,168,76,0.3) !important;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110951.96683503906!2d31.18380339999999!3d30.059482799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate%2C%20Egypt!5e0!3m2!1sen!2sus!4v1750665060606!5m2!1sen!2sus"
+                            width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade" title="موقع Fortissimo Academy">
+                    </iframe>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="https://maps.google.com" target="_blank" class="btn-gold px-4 py-2">
+                        <i class="fas fa-directions ms-1"></i> احصل على الاتجاهات
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

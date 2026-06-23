@@ -1,0 +1,114 @@
+@model Fortissimo.Models.ContactMessage
+@{
+    ViewData["Title"] = "اتصل بنا";
+}
+
+<!-- Page Hero -->
+<div class="page-hero">
+    <div class="container">
+        <h1><i class="fas fa-envelope ms-2"></i> اتصل بنا</h1>
+        <p>نحن هنا للإجابة على استفساراتك</p>
+    </div>
+</div>
+
+<section class="section-dark">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Contact Info -->
+            <div class="col-lg-4">
+                <div class="text-end">
+                    <h3 class="text-gold mb-4">تواصل معنا</h3>
+                    <p class="text-muted mb-4">يسعدنا التواصل معك! تفضل بالتواصل معنا عبر أي من الوسائل التالية أو أرسل لنا رسالتك مباشرة.</p>
+                </div>
+                <div class="d-flex flex-column gap-3">
+                    <div class="contact-info-box">
+                        <div class="icon"><i class="fas fa-phone"></i></div>
+                        <h6 class="text-gold">اتصل بنا</h6>
+                        <p class="text-muted mb-0 small">+20 100 000 0000</p>
+                    </div>
+                    <div class="contact-info-box">
+                        <div class="icon"><i class="fas fa-envelope"></i></div>
+                        <h6 class="text-gold">البريد الإلكتروني</h6>
+                        <p class="text-muted mb-0 small">info@fortissimo-music.com</p>
+                    </div>
+                    <div class="contact-info-box">
+                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h6 class="text-gold">العنوان</h6>
+                        <p class="text-muted mb-0 small">القاهرة، جمهورية مصر العربية</p>
+                    </div>
+                    <div class="contact-info-box">
+                        <div class="icon"><i class="fas fa-clock"></i></div>
+                        <h6 class="text-gold">ساعات العمل</h6>
+                        <p class="text-muted mb-0 small">السبت - الخميس: 9ص - 9م</p>
+                    </div>
+                </div>
+                <div class="social-links mt-4">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-lg-8">
+                <div class="contact-form-card">
+                    <h4 class="text-gold mb-4 text-end">
+                        <i class="fas fa-paper-plane ms-2"></i> أرسل لنا رسالة
+                    </h4>
+                    <form asp-action="Contact" method="post" novalidate>
+                        @Html.AntiForgeryToken()
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label asp-for="Name" class="form-label"></label>
+                                <input asp-for="Name" class="form-control" placeholder="اسمك الكريم" />
+                                <span asp-validation-for="Name" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Email" class="form-label"></label>
+                                <input asp-for="Email" class="form-control" placeholder="example@email.com" />
+                                <span asp-validation-for="Email" class="text-danger small"></span>
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="Phone" class="form-label"></label>
+                                <input asp-for="Phone" class="form-control" placeholder="+20 1XX XXX XXXX" />
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="Message" class="form-label"></label>
+                                <textarea asp-for="Message" class="form-control" rows="5" placeholder="اكتب رسالتك هنا..."></textarea>
+                                <span asp-validation-for="Message" class="text-danger small"></span>
+                            </div>
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn-gold px-5 py-2">
+                                    <i class="fas fa-paper-plane ms-2"></i> إرسال الرسالة
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Google Map -->
+<section class="section-darker map-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>موقعنا على الخريطة</h2>
+            <div class="gold-divider"></div>
+        </div>
+        <div class="rounded overflow-hidden border" style="border-color: rgba(201,168,76,0.3) !important;">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d110951.96683503906!2d31.18380339999999!3d30.059482799999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate%2C%20Egypt!5e0!3m2!1sen!2sus!4v1750665060606!5m2!1sen!2sus"
+                width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade" title="موقعنا">
+            </iframe>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

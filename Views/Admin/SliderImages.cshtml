@@ -1,0 +1,43 @@
+@model List<Fortissimo.Models.SliderImage>
+@{
+    ViewData["Title"] = "إدارة السلايدر";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="text-gold mb-0"><i class="fas fa-images ms-2"></i> صور السلايدر</h3>
+    <a asp-action="CreateSlider" class="btn-gold px-3 py-2">
+        <i class="fas fa-plus ms-1"></i> إضافة صورة
+    </a>
+</div>
+
+<div class="row g-3">
+    @foreach (var img in Model)
+    {
+        <div class="col-md-4">
+            <div class="vision-card text-center p-3">
+                <img src="@img.ImageUrl" style="width:100%; height:180px; object-fit:cover; border-radius:8px; border:1px solid rgba(201,168,76,0.2);"
+                     alt="@img.Title" onerror="this.src='/images/logo.svg'" />
+                <h6 class="text-gold mt-2 mb-1">@img.Title</h6>
+                <small class="text-muted">الترتيب: @img.Order</small>
+                <div class="mt-2">
+                    @if (img.IsActive)
+                    {
+                        <span class="badge bg-success ms-1">نشط</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary ms-1">غير نشط</span>
+                    }
+                    <form asp-action="DeleteSlider" asp-route-id="@img.Id" method="post" class="d-inline"
+                          onsubmit="return confirm('حذف هذه الصورة؟')">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>

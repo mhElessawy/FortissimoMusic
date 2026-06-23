@@ -1,0 +1,51 @@
+@{
+    ViewData["Title"] = "لوحة التحكم";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3 class="text-gold mb-4"><i class="fas fa-tachometer-alt ms-2"></i> لوحة التحكم</h3>
+
+<div class="row g-4 mb-4">
+    <div class="col-md-4">
+        <div class="admin-stat-card">
+            <div class="stat-number">@ViewBag.EventsCount</div>
+            <div class="text-muted">الفعاليات</div>
+            <i class="fas fa-calendar-alt text-gold mt-2" style="font-size:1.5rem;"></i>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="admin-stat-card">
+            <div class="stat-number text-danger">@ViewBag.MessagesCount</div>
+            <div class="text-muted">رسائل غير مقروءة</div>
+            <i class="fas fa-envelope text-gold mt-2" style="font-size:1.5rem;"></i>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="admin-stat-card">
+            <div class="stat-number">@ViewBag.SliderCount</div>
+            <div class="text-muted">صور السلايدر</div>
+            <i class="fas fa-images text-gold mt-2" style="font-size:1.5rem;"></i>
+        </div>
+    </div>
+</div>
+
+<div class="row g-3">
+    <div class="col-md-4">
+        <a asp-action="Events" class="vision-card d-block text-decoration-none text-center p-3">
+            <i class="fas fa-calendar-plus text-gold" style="font-size:2rem;"></i>
+            <h6 class="text-gold mt-2">إدارة الفعاليات</h6>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a asp-action="SliderImages" class="vision-card d-block text-decoration-none text-center p-3">
+            <i class="fas fa-images text-gold" style="font-size:2rem;"></i>
+            <h6 class="text-gold mt-2">إدارة السلايدر</h6>
+        </a>
+    </div>
+    <div class="col-md-4">
+        <a asp-action="Messages" class="vision-card d-block text-decoration-none text-center p-3">
+            <i class="fas fa-envelope-open text-gold" style="font-size:2rem;"></i>
+            <h6 class="text-gold mt-2">الرسائل الواردة</h6>
+        </a>
+    </div>
+</div>
