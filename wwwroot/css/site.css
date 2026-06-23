@@ -130,100 +130,186 @@ body {
         transform: translateY(-2px);
     }
 
-/* ===== HERO SLIDER ===== */
-.hero-slider {
+/* ===== HERO SPLIT ===== */
+.hero-split {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    background: var(--dark);
+    overflow: hidden;
+}
+
+    .hero-split .row {
+        width: 100%;
+        min-height: calc(100vh - 80px);
+    }
+
+/* عمود الصور */
+.hero-img-col {
     position: relative;
-    height: 90vh;
     min-height: 500px;
     overflow: hidden;
-    background: var(--dark);
+    background: var(--dark-2);
 }
 
-    .hero-slider .carousel-inner,
-    .hero-slider .carousel-item {
-        height: 100%;
-    }
-
-.hero-slide-bg {
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-    background: var(--dark);
-}
-
-.hero-slide-img {
-    position: absolute;
-    top: 0;
-    left: 0;
+.portrait-slide-img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: center;
-    background: var(--dark);
+    object-fit: cover;
+    object-position: center top;
+    display: block;
 }
 
-.hero-slide-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 40%, rgba(0,0,0,0.65) 100%);
-    z-index: 1;
-    pointer-events: none;
-}
-
-.hero-slide-content {
-    position: absolute;
-    bottom: 15%;
-    right: 0;
-    left: 0;
-    z-index: 2;
-    text-align: center;
-    padding: 0 2rem;
-}
-
-    .hero-slide-content h1 {
-        font-size: clamp(2rem, 5vw, 4rem);
-        font-weight: 900;
-        color: #fff;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-        margin-bottom: 0.5rem;
-    }
-
-    .hero-slide-content p {
-        font-size: clamp(1rem, 2vw, 1.4rem);
-        color: var(--gold-light);
-        margin-bottom: 1.5rem;
-    }
-
+/* أزرار التنقل */
 .carousel-control-prev,
 .carousel-control-next {
-    width: 8%;
+    width: 15%;
     z-index: 10;
     opacity: 1;
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    width: 3rem;
-    height: 3rem;
-    background-color: rgba(201, 168, 76, 0.35);
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: rgba(201, 168, 76, 0.4);
     border-radius: 50%;
     background-size: 50%;
-    border: 2px solid rgba(201, 168, 76, 0.6);
+    border: 2px solid rgba(201, 168, 76, 0.7);
     transition: all 0.3s;
 }
 
 .carousel-control-prev:hover .carousel-control-prev-icon,
 .carousel-control-next:hover .carousel-control-next-icon {
-    background-color: rgba(201, 168, 76, 0.75);
+    background-color: rgba(201, 168, 76, 0.85);
     border-color: var(--gold);
     transform: scale(1.1);
 }
 
+/* مؤشرات الصور */
+.hero-indicators {
+    bottom: 12px;
+    z-index: 10;
+}
+
 .carousel-indicators [data-bs-target] {
     background-color: var(--gold);
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
+    border: none;
+    opacity: 0.5;
+}
+
+.carousel-indicators .active {
+    opacity: 1;
+}
+
+/* عمود السيرة الذاتية */
+.hero-bio-col {
+    padding: 3rem 3.5rem;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-2) 100%);
+    border-right: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.hero-bio-content {
+    text-align: right;
+    max-width: 600px;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.hero-bio-label {
+    color: var(--gold);
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.hero-bio-name {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 0.2rem;
+    line-height: 1.1;
+}
+
+.hero-bio-name-en {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.hero-bio-text {
+    color: #ccc;
+    line-height: 2;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* الـ badges */
+.hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.hero-badge {
+    background: rgba(201, 168, 76, 0.1);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    color: var(--gold-light);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+/* الإحصائيات داخل الـ hero */
+.hero-stat {
+    background: rgba(201, 168, 76, 0.05);
+    border: 1px solid rgba(201, 168, 76, 0.15);
+    border-radius: 12px;
+    padding: 1rem 0.5rem;
+    transition: all 0.3s;
+}
+
+.hero-stat:hover {
+    border-color: var(--gold);
+    background: rgba(201, 168, 76, 0.1);
+}
+
+.hero-stat-number {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.hero-stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .hero-split .row {
+        min-height: auto;
+    }
+
+    .hero-img-col {
+        min-height: 55vh;
+    }
+
+    .hero-bio-col {
+        padding: 2.5rem 1.5rem;
+        border-right: none;
+        border-top: 1px solid rgba(201, 168, 76, 0.15);
+    }
+
+    .hero-bio-content {
+        max-width: 100%;
+    }
 }
 
 /* ===== SECTION TITLES ===== */

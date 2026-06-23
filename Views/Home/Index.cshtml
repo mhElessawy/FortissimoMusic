@@ -5,69 +5,107 @@
     var upcomingEvents = ViewBag.UpcomingEvents as List<Event> ?? new List<Event>();
 }
 
-<!-- ===== HERO SLIDER ===== -->
-<section class="hero-slider">
-    @if (sliderImages.Any())
-    {
-        <div id="heroCarousel" class="carousel slide h-100" data-bs-ride="carousel" data-bs-interval="5000">
-            <div class="carousel-indicators">
-                @for (int i = 0; i < sliderImages.Count; i++)
-                {
-                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@i"
-                            class="@(i == 0 ? "active" : "")" aria-label="Slide @(i + 1)"></button>
-                }
-            </div>
-            <div class="carousel-inner h-100">
-                @for (int i = 0; i < sliderImages.Count; i++)
-                {
-                    var img = sliderImages[i];
-                    <div class="carousel-item h-100 @(i == 0 ? "active" : "")">
-                        <div class="hero-slide-bg">
-                            <img src="@img.ImageUrl" alt="@img.Title" class="hero-slide-img" />
-                            <div class="hero-slide-overlay"></div>
-                            <div class="hero-slide-content animate__animated animate__fadeInUp">
-                                <h1>@img.Title</h1>
-                                <p>Fortissimo Music Academy</p>
-                                <div class="d-flex gap-3 justify-content-center">
-                                    <a asp-action="About" class="btn-gold px-4 py-2">
-                                        <i class="fas fa-music ms-1"></i> تعرف علينا
-                                    </a>
-                                    <a asp-action="Contact" class="btn-outline-gold px-4 py-2">
-                                        <i class="fas fa-phone ms-1"></i> تواصل معنا
-                                    </a>
-                                </div>
+<!-- ===== HERO SPLIT ===== -->
+<section class="hero-split">
+    <div class="row g-0 h-100">
+
+        <!-- عمود الصور (يسار) -->
+        <div class="col-lg-5 hero-img-col">
+            @if (sliderImages.Any())
+            {
+                <div id="heroCarousel" class="carousel slide h-100" data-bs-ride="carousel" data-bs-interval="4000">
+                    <div class="carousel-inner h-100">
+                        @for (int i = 0; i < sliderImages.Count; i++)
+                        {
+                            var img = sliderImages[i];
+                            <div class="carousel-item h-100 @(i == 0 ? "active" : "")">
+                                <img src="@img.ImageUrl" alt="@img.Title" class="portrait-slide-img" />
                             </div>
+                        }
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+
+                    <div class="carousel-indicators hero-indicators">
+                        @for (int i = 0; i < sliderImages.Count; i++)
+                        {
+                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@i"
+                                    class="@(i == 0 ? "active" : "")" aria-label="Slide @(i + 1)"></button>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="h-100 d-flex align-items-center justify-content-center" style="background: var(--dark-2);">
+                    <i class="fas fa-music" style="font-size:6rem; color:rgba(201,168,76,0.2);"></i>
+                </div>
+            }
+        </div>
+
+        <!-- عمود السيرة الذاتية (يمين) -->
+        <div class="col-lg-7 hero-bio-col d-flex align-items-center">
+            <div class="hero-bio-content w-100">
+
+                <p class="hero-bio-label">FOUNDER &amp; DIRECTOR</p>
+                <h1 class="hero-bio-name">د. شيرين شكري</h1>
+                <p class="hero-bio-name-en">Dr. Sherin Shokry</p>
+                <div class="gold-divider mb-4" style="margin-right:0; margin-left:auto;"></div>
+
+                <div class="hero-badges mb-4">
+                    <span class="hero-badge"><i class="fas fa-music ms-1"></i> بيانو وكلارنيت</span>
+                    <span class="hero-badge"><i class="fas fa-graduation-cap ms-1"></i> ماجستير موسيقى</span>
+                    <span class="hero-badge"><i class="fas fa-globe ms-1"></i> خبرة دولية</span>
+                    <span class="hero-badge"><i class="fas fa-award ms-1"></i> جوائز موسيقية</span>
+                </div>
+
+                <p class="hero-bio-text">
+                    مؤسسة ومديرة أكاديمية Fortissimo للموسيقى، موسيقارة وأستاذة متخصصة في تعليم البيانو والكلارنيت،
+                    تحمل رؤية حقيقية لنشر الفن الموسيقي وتطوير المواهب.
+                </p>
+
+                <div class="row g-3 mb-4 text-center">
+                    <div class="col-4">
+                        <div class="hero-stat">
+                            <div class="hero-stat-number">+500</div>
+                            <div class="hero-stat-label">طالب متخرج</div>
                         </div>
                     </div>
-                }
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
-        </div>
-    }
-    else
-    {
-        <div class="hero-slide-bg d-flex align-items-center justify-content-center"
-             style="background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%); height:100%;">
-            <div class="hero-slide-content text-center">
-                <img src="/images/logo.svg" alt="Fortissimo" class="rounded-circle mb-4" style="width:120px;height:120px;border:3px solid var(--gold);" />
-                <h1 class="animate__animated animate__fadeInDown">مرحباً بكم في Fortissimo Music</h1>
-                <p class="animate__animated animate__fadeInUp">أكاديمية موسيقية متخصصة في تعليم البيانو والكلارنيت</p>
-                <div class="d-flex gap-3 justify-content-center animate__animated animate__fadeInUp">
-                    <a asp-action="About" class="btn-gold px-4 py-2">
-                        <i class="fas fa-music ms-1"></i> تعرف علينا
+                    <div class="col-4">
+                        <div class="hero-stat">
+                            <div class="hero-stat-number">+10</div>
+                            <div class="hero-stat-label">سنوات خبرة</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="hero-stat">
+                            <div class="hero-stat-number">+50</div>
+                            <div class="hero-stat-label">حفل موسيقي</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex gap-3 flex-wrap">
+                    <a asp-action="CV" class="btn-gold px-4 py-2">
+                        <i class="fas fa-user-tie ms-1"></i> السيرة الذاتية
                     </a>
                     <a asp-action="Contact" class="btn-outline-gold px-4 py-2">
-                        <i class="fas fa-phone ms-1"></i> تواصل معنا
+                        <i class="fas fa-envelope ms-1"></i> تواصل معها
+                    </a>
+                    <a asp-action="About" class="btn-outline-gold px-4 py-2">
+                        <i class="fas fa-info-circle ms-1"></i> من نحن
                     </a>
                 </div>
+
             </div>
         </div>
-    }
+
+    </div>
 </section>
 
 <!-- ===== WELCOME / STATS ===== -->
@@ -96,46 +134,6 @@
                 <div class="stat-item">
                     <div class="number">2</div>
                     <div class="label">تخصص موسيقي</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== DR. SHERIN SHOKRY ===== -->
-<section class="section-darker">
-    <div class="container">
-        <div class="row g-5 align-items-center">
-            <div class="col-lg-5 text-center">
-                <div class="founder-img-wrapper">
-                    <img src="/images/dr-sherin.jpeg"
-                         alt="د. شيرين شكري"
-                         class="founder-img"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                    <div class="founder-img-placeholder" style="display:none;">
-                        <i class="fas fa-user-circle"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-7" style="text-align:right;">
-                <p class="text-gold mb-1" style="letter-spacing:2px; font-size:0.9rem;">FOUNDER & DIRECTOR</p>
-                <h2 style="font-size:2.4rem; font-weight:900; color:#fff; margin-bottom:0.3rem;">
-                    د. شيرين شكري
-                </h2>
-                <div class="gold-divider mb-3" style="margin-right:0; margin-left:auto;"></div>
-                <p style="color:#ccc; line-height:2; font-size:1.05rem;">
-                    مؤسسة ومديرة أكاديمية Fortissimo للموسيقى، موسيقارة وأستاذة متخصصة في تعليم البيانو والكلارنيت، تحمل رؤية حقيقية لنشر الفن الموسيقي وتطوير المواهب في الكويت والعالم العربي.
-                </p>
-                <p style="color:#aaa; line-height:2;">
-                    بخبرة دولية وشغف حقيقي بالموسيقى الكلاسيكية، أسست د. شيرين Fortissimo لتكون بيتاً للإبداع الموسيقي وصرح تعليمي يُخرّج جيلاً من الموسيقيين المتميزين.
-                </p>
-                <div class="d-flex gap-3 mt-4 justify-content-start flex-wrap">
-                    <a asp-action="CV" class="btn-gold px-4 py-2">
-                        <i class="fas fa-user-tie ms-1"></i> السيرة الذاتية
-                    </a>
-                    <a asp-action="Contact" class="btn-outline-gold px-4 py-2">
-                        <i class="fas fa-envelope ms-1"></i> تواصل معها
-                    </a>
                 </div>
             </div>
         </div>
