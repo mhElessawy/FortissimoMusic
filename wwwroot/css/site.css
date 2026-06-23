@@ -133,107 +133,121 @@ body {
 /* ===== HERO ===== */
 .hero-main {
     background: var(--dark);
-    height: 72vh;
-    max-height: 700px;
-    min-height: 440px;
-    overflow: hidden;
     border-bottom: 1px solid rgba(201,168,76,0.15);
+    overflow: hidden;
 }
 
-.hero-row { height: 100%; }
-
-/* --- عمود السيرة الذاتية (يمين) --- */
-.hero-bio-panel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 2rem;
-    background: linear-gradient(160deg, var(--dark-2) 0%, var(--dark) 100%);
-    position: relative;
-    text-align: center;
+/* صورة د. شيرين */
+.hero-dr-col {
+    overflow: hidden;
+    background: var(--dark-2);
+    border-left: 2px solid rgba(201,168,76,0.2);
 }
 
-.hero-bio-panel::after {
-    content: '';
-    position: absolute;
-    top: 10%; bottom: 10%;
-    left: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-}
-
-.hero-bio-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.hero-dr-img {
     width: 100%;
-    max-width: 360px;
-}
-
-/* صورة الدكتورة دائرية */
-.hero-dr-photo-wrap { margin-bottom: 1rem; position: relative; }
-
-.hero-dr-circle {
-    width: 145px;
-    height: 145px;
-    border-radius: 50%;
+    height: 60vh;
+    min-height: 320px;
+    max-height: 620px;
     object-fit: cover;
     object-position: top center;
-    border: 3px solid var(--gold);
-    box-shadow: 0 0 0 7px rgba(201,168,76,0.1), 0 12px 35px rgba(0,0,0,0.5);
     display: block;
 }
 
-.hero-dr-circle-fallback {
-    display: none;
-    width: 145px;
-    height: 145px;
+/* carousel الصور */
+.hero-gallery-col {
+    overflow: hidden;
+    background: var(--dark);
+    position: relative;
+}
+
+.hero-gallery-img {
+    width: 100%;
+    height: 60vh;
+    min-height: 320px;
+    max-height: 620px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+
+/* أزرار التنقل */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 8%;
+    z-index: 10;
+    opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 2.2rem;
+    height: 2.2rem;
+    background-color: rgba(0,0,0,0.55);
     border-radius: 50%;
-    background: var(--dark-3);
-    border: 3px solid var(--gold);
-    align-items: center;
-    justify-content: center;
-    font-size: 4rem;
-    color: rgba(201,168,76,0.3);
+    background-size: 55%;
+    border: 1.5px solid rgba(201,168,76,0.55);
+    transition: all 0.2s;
 }
 
-/* النص */
-.hero-bio-label {
-    display: block;
-    font-size: 0.68rem;
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+    background-color: rgba(201,168,76,0.7);
+    border-color: var(--gold);
+}
+
+/* مؤشرات */
+.carousel-indicators {
+    bottom: 10px;
+    z-index: 10;
+}
+
+.carousel-indicators [data-bs-target] {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255,255,255,0.4);
+    margin: 0 3px;
+    transition: all 0.25s;
+}
+
+.carousel-indicators .active {
+    background-color: var(--gold);
+    transform: scale(1.35);
+}
+
+/* شريط البيو */
+.hero-bio-strip {
+    background: linear-gradient(135deg, var(--dark-2) 0%, var(--dark) 100%);
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+}
+
+.hero-label {
+    font-size: 0.7rem;
     letter-spacing: 3px;
     color: var(--gold);
     font-weight: 700;
-    margin-bottom: 0.3rem;
 }
 
-.hero-bio-name {
-    font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+.hero-name {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
     font-weight: 900;
     color: #fff;
-    margin-bottom: 0.15rem;
-    line-height: 1.15;
+    margin-bottom: 0.1rem;
 }
 
-.hero-bio-name-en {
+.hero-name-en {
     color: var(--text-muted);
     font-size: 0.82rem;
-    margin-bottom: 0.9rem;
-}
-
-.hero-gold-line {
-    width: 55px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    margin: 0 auto 1rem;
+    margin-bottom: 0;
 }
 
 .hero-badges {
     display: flex;
     flex-wrap: wrap;
     gap: 0.35rem;
-    justify-content: center;
-    margin-bottom: 1.3rem;
+    justify-content: flex-end;
 }
 
 .hero-badge {
@@ -245,97 +259,36 @@ body {
     font-size: 0.75rem;
 }
 
-.hero-bio-actions {
-    display: flex;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    justify-content: center;
+.hero-stat {
+    background: rgba(201,168,76,0.05);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 8px;
+    padding: 0.6rem 0.3rem;
+    transition: border-color 0.3s;
 }
 
-/* --- عمود الصور (يسار) --- */
-.hero-photos-panel {
-    position: relative;
-    overflow: hidden;
-    background: var(--dark);
+.hero-stat:hover { border-color: rgba(201,168,76,0.4); }
+
+.hero-stat-n {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
 }
 
-.hero-photo-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-}
-
-/* أزرار التنقل */
-.carousel-control-prev,
-.carousel-control-next {
-    width: 10%;
-    z-index: 10;
-    opacity: 1;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    width: 2rem;
-    height: 2rem;
-    background-color: rgba(0,0,0,0.5);
-    border-radius: 50%;
-    background-size: 55%;
-    border: 1.5px solid rgba(201,168,76,0.5);
-    transition: all 0.2s;
-}
-
-.carousel-control-prev:hover .carousel-control-prev-icon,
-.carousel-control-next:hover .carousel-control-next-icon {
-    background-color: rgba(201,168,76,0.65);
-    border-color: var(--gold);
-}
-
-/* مؤشرات */
-.hero-dots { bottom: 10px; z-index: 10; }
-
-.carousel-indicators [data-bs-target] {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    border: none;
-    background-color: rgba(255,255,255,0.35);
-    margin: 0 3px;
-    transition: all 0.3s;
-}
-
-.carousel-indicators .active {
-    background-color: var(--gold);
-    transform: scale(1.4);
-}
-
-/* --- شريط الإحصائيات --- */
-.stats-strip {
-    background: var(--dark-3);
-    padding: 1.5rem 0;
-    border-top: 1px solid rgba(201,168,76,0.12);
-    border-bottom: 1px solid rgba(201,168,76,0.08);
+.hero-stat-l {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
 }
 
 /* Responsive */
-@media (max-width: 767px) {
-    .hero-main {
-        height: auto;
-        max-height: none;
-        min-height: auto;
+@media (max-width: 575px) {
+    .hero-dr-img,
+    .hero-gallery-img {
+        height: 42vh;
+        min-height: 200px;
     }
-
-    .hero-bio-panel {
-        min-height: 380px;
-        padding: 2rem 1.5rem;
-    }
-
-    .hero-bio-panel::after { display: none; }
-
-    .hero-photos-panel { min-height: 300px; }
-
-    .hero-dr-circle { width: 120px; height: 120px; }
 }
 
 /* ===== SECTION TITLES ===== */

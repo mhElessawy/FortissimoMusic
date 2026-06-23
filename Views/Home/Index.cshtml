@@ -7,58 +7,27 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero-main">
-    <div class="row g-0 hero-row">
+    <div class="row g-0">
 
-        <!-- عمود الـ bio — أول في DOM = يمين في RTL -->
-        <div class="col-lg-5 col-md-5 hero-bio-panel">
-            <div class="hero-bio-inner">
-
-                <div class="hero-dr-photo-wrap">
-                    <img src="/images/dr-sherin.jpeg"
-                         alt="د. شيرين شكري"
-                         class="hero-dr-circle"
-                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-                    <div class="hero-dr-circle-fallback">
-                        <i class="fas fa-user-circle"></i>
-                    </div>
-                </div>
-
-                <span class="hero-bio-label">FOUNDER &amp; DIRECTOR</span>
-                <h1 class="hero-bio-name">د. شيرين شكري</h1>
-                <p class="hero-bio-name-en">Dr. Sherin Shokry</p>
-
-                <div class="hero-gold-line"></div>
-
-                <div class="hero-badges">
-                    <span class="hero-badge"><i class="fas fa-music ms-1"></i> بيانو وكلارنيت</span>
-                    <span class="hero-badge"><i class="fas fa-graduation-cap ms-1"></i> ماجستير موسيقى</span>
-                    <span class="hero-badge"><i class="fas fa-globe ms-1"></i> خبرة دولية</span>
-                    <span class="hero-badge"><i class="fas fa-award ms-1"></i> جوائز موسيقية</span>
-                </div>
-
-                <div class="hero-bio-actions">
-                    <a asp-action="CV" class="btn-gold px-4 py-2">
-                        <i class="fas fa-user-tie ms-1"></i> السيرة الذاتية
-                    </a>
-                    <a asp-action="Contact" class="btn-outline-gold px-4 py-2">
-                        <i class="fas fa-envelope ms-1"></i> تواصل معها
-                    </a>
-                </div>
-
-            </div>
+        <!-- صورة د. شيرين — أول في DOM = يمين في RTL -->
+        <div class="col-4 col-md-4 col-lg-3 hero-dr-col">
+            <img src="/images/dr-sherin.jpeg"
+                 alt="د. شيرين شكري"
+                 class="hero-dr-img"
+                 onerror="this.src='/images/logo.svg'" />
         </div>
 
-        <!-- عمود الصور — ثاني في DOM = يسار في RTL -->
-        <div class="col-lg-7 col-md-7 hero-photos-panel">
+        <!-- صور الأكاديمية carousel — ثاني في DOM = يسار في RTL -->
+        <div class="col-8 col-md-8 col-lg-9 hero-gallery-col">
             @if (sliderImages.Any())
             {
-                <div id="heroCarousel" class="carousel slide h-100" data-bs-ride="carousel" data-bs-interval="4000">
-                    <div class="carousel-inner h-100">
+                <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+                    <div class="carousel-inner">
                         @for (int i = 0; i < sliderImages.Count; i++)
                         {
                             var img = sliderImages[i];
-                            <div class="carousel-item h-100 @(i == 0 ? "active" : "")">
-                                <img src="@img.ImageUrl" alt="@img.Title" class="hero-photo-img" />
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@img.ImageUrl" alt="@img.Title" class="hero-gallery-img" />
                             </div>
                         }
                     </div>
@@ -68,7 +37,7 @@
                     <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon"></span>
                     </button>
-                    <div class="carousel-indicators hero-dots">
+                    <div class="carousel-indicators">
                         @for (int i = 0; i < sliderImages.Count; i++)
                         {
                             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@i"
@@ -77,45 +46,51 @@
                     </div>
                 </div>
             }
-            else
-            {
-                <div class="h-100 d-flex align-items-center justify-content-center" style="background:var(--dark-2);">
-                    <i class="fas fa-images" style="font-size:5rem;color:rgba(201,168,76,0.15);"></i>
-                </div>
-            }
         </div>
 
     </div>
 </section>
 
-<!-- ===== إحصائيات ===== -->
-<div class="stats-strip">
-    <div class="container">
-        <div class="row g-0 text-center">
-            <div class="col-3">
-                <div class="stat-item">
-                    <div class="number">+500</div>
-                    <div class="label">طالب متخرج</div>
+<!-- شريط البيو -->
+<div class="hero-bio-strip">
+    <div class="container-fluid px-4">
+        <div class="row align-items-center g-3 py-3">
+
+            <div class="col-lg-5 col-md-6 text-end">
+                <p class="hero-label mb-1">FOUNDER &amp; DIRECTOR</p>
+                <h2 class="hero-name">د. شيرين شكري</h2>
+                <p class="hero-name-en">Dr. Sherin Shokry</p>
+                <div class="hero-badges mt-2">
+                    <span class="hero-badge"><i class="fas fa-music ms-1"></i> بيانو وكلارنيت</span>
+                    <span class="hero-badge"><i class="fas fa-graduation-cap ms-1"></i> ماجستير موسيقى</span>
+                    <span class="hero-badge"><i class="fas fa-globe ms-1"></i> خبرة دولية</span>
+                    <span class="hero-badge"><i class="fas fa-award ms-1"></i> جوائز موسيقية</span>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="stat-item">
-                    <div class="number">+10</div>
-                    <div class="label">سنوات خبرة</div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="row g-2 text-center">
+                    <div class="col-4">
+                        <div class="hero-stat"><div class="hero-stat-n">+500</div><div class="hero-stat-l">طالب</div></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="hero-stat"><div class="hero-stat-n">+10</div><div class="hero-stat-l">سنوات خبرة</div></div>
+                    </div>
+                    <div class="col-4">
+                        <div class="hero-stat"><div class="hero-stat-n">+50</div><div class="hero-stat-l">حفل موسيقي</div></div>
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="stat-item">
-                    <div class="number">+50</div>
-                    <div class="label">حفل موسيقي</div>
-                </div>
+
+            <div class="col-lg-3 col-md-12 d-flex gap-2 justify-content-center flex-wrap">
+                <a asp-action="CV" class="btn-gold px-4 py-2">
+                    <i class="fas fa-user-tie ms-1"></i> السيرة الذاتية
+                </a>
+                <a asp-action="Contact" class="btn-outline-gold px-4 py-2">
+                    <i class="fas fa-envelope ms-1"></i> تواصل معها
+                </a>
             </div>
-            <div class="col-3">
-                <div class="stat-item">
-                    <div class="number">2</div>
-                    <div class="label">تخصص موسيقي</div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
