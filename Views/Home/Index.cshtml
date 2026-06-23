@@ -22,7 +22,9 @@
                 {
                     var img = sliderImages[i];
                     <div class="carousel-item h-100 @(i == 0 ? "active" : "")">
-                        <div class="hero-slide-bg" style="background-image: url('@img.ImageUrl');">
+                        <div class="hero-slide-bg">
+                            <img src="@img.ImageUrl" alt="@img.Title" class="hero-slide-img" />
+                            <div class="hero-slide-overlay"></div>
                             <div class="hero-slide-content animate__animated animate__fadeInUp">
                                 <h1>@img.Title</h1>
                                 <p>Fortissimo Music Academy</p>
