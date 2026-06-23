@@ -44,3 +44,34 @@ function revealOnScroll() {
 }
 
 document.addEventListener('DOMContentLoaded', revealOnScroll);
+
+// Hero carousel initialization
+document.addEventListener('DOMContentLoaded', function () {
+    var carouselEl = document.getElementById('heroCarousel');
+    if (carouselEl && typeof bootstrap !== 'undefined') {
+        var carousel = new bootstrap.Carousel(carouselEl, {
+            interval: 5000,
+            ride: 'carousel',
+            wrap: true,
+            touch: true
+        });
+
+        var prevBtn = carouselEl.querySelector('.carousel-control-prev');
+        var nextBtn = carouselEl.querySelector('.carousel-control-next');
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                carousel.prev();
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                carousel.next();
+            });
+        }
+    }
+});
