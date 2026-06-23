@@ -133,44 +133,17 @@ body {
 /* ===== HERO ===== */
 .hero-main {
     background: var(--dark);
-    border-bottom: 1px solid rgba(201,168,76,0.15);
     overflow: hidden;
-}
-
-/* صورة د. شيرين */
-.hero-dr-col {
-    overflow: hidden;
-    background: var(--dark-2);
-    border-left: 2px solid rgba(201,168,76,0.2);
-}
-
-.hero-dr-img {
-    width: 100%;
-    height: 60vh;
-    min-height: 320px;
-    max-height: 620px;
-    object-fit: contain;
-    object-position: center;
-    display: block;
-    background: var(--dark-2);
-}
-
-/* carousel الصور */
-.hero-gallery-col {
-    overflow: hidden;
-    background: var(--dark);
-    position: relative;
 }
 
 .hero-gallery-img {
     width: 100%;
-    height: 60vh;
-    min-height: 320px;
-    max-height: 620px;
-    object-fit: contain;
+    height: 52vh;
+    min-height: 260px;
+    max-height: 560px;
+    object-fit: cover;
     object-position: center;
     display: block;
-    background: var(--dark);
 }
 
 /* أزرار التنقل */
@@ -222,7 +195,20 @@ body {
 /* شريط البيو */
 .hero-bio-strip {
     background: linear-gradient(135deg, var(--dark-2) 0%, var(--dark) 100%);
+    border-top: 1px solid rgba(201,168,76,0.15);
     border-bottom: 1px solid rgba(201,168,76,0.12);
+}
+
+/* صورة مصغرة للدكتورة في الشريط */
+.hero-dr-thumb {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+    border: 2px solid rgba(201,168,76,0.5);
+    display: block;
+    flex-shrink: 0;
 }
 
 .hero-label {
@@ -233,16 +219,14 @@ body {
 }
 
 .hero-name {
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-size: clamp(1.2rem, 2.2vw, 1.8rem);
     font-weight: 900;
     color: #fff;
-    margin-bottom: 0.1rem;
 }
 
 .hero-name-en {
     color: var(--text-muted);
     font-size: 0.82rem;
-    margin-bottom: 0;
 }
 
 .hero-badges {
@@ -261,35 +245,18 @@ body {
     font-size: 0.75rem;
 }
 
-.hero-stat {
-    background: rgba(201,168,76,0.05);
-    border: 1px solid rgba(201,168,76,0.15);
-    border-radius: 8px;
-    padding: 0.6rem 0.3rem;
-    transition: border-color 0.3s;
-}
-
-.hero-stat:hover { border-color: rgba(201,168,76,0.4); }
-
-.hero-stat-n {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: var(--gold);
-    line-height: 1;
-}
-
-.hero-stat-l {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-top: 0.2rem;
-}
-
 /* Responsive */
-@media (max-width: 575px) {
-    .hero-dr-img,
+@media (max-width: 767px) {
     .hero-gallery-img {
-        height: 42vh;
+        height: 38vh;
         min-height: 200px;
+    }
+    .hero-dr-thumb {
+        width: 58px;
+        height: 58px;
+    }
+    .hero-bio-strip .flex-nowrap {
+        flex-wrap: wrap !important;
     }
 }
 

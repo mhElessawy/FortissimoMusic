@@ -7,60 +7,50 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero-main">
-    <div class="row g-0">
-
-        <!-- صورة د. شيرين — أول في DOM = يمين في RTL -->
-        <div class="col-4 col-md-4 col-lg-3 hero-dr-col">
-            <img src="/images/dr-sherin.jpeg"
-                 alt="د. شيرين شكري"
-                 class="hero-dr-img"
-                 onerror="this.src='/images/logo.svg'" />
-        </div>
-
-        <!-- صور الأكاديمية carousel — ثاني في DOM = يسار في RTL -->
-        <div class="col-8 col-md-8 col-lg-9 hero-gallery-col">
-            @if (sliderImages.Any())
-            {
-                <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
-                    <div class="carousel-inner">
-                        @for (int i = 0; i < sliderImages.Count; i++)
-                        {
-                            var img = sliderImages[i];
-                            <div class="carousel-item @(i == 0 ? "active" : "")">
-                                <img src="@img.ImageUrl" alt="@img.Title" class="hero-gallery-img" />
-                            </div>
-                        }
+    @if (sliderImages.Any())
+    {
+        <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
+            <div class="carousel-inner">
+                @for (int i = 0; i < sliderImages.Count; i++)
+                {
+                    var img = sliderImages[i];
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <img src="@img.ImageUrl" alt="@img.Title" class="hero-gallery-img" />
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </button>
-                    <div class="carousel-indicators">
-                        @for (int i = 0; i < sliderImages.Count; i++)
-                        {
-                            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@i"
-                                    class="@(i == 0 ? "active" : "")" aria-label="Slide @(i + 1)"></button>
-                        }
-                    </div>
-                </div>
-            }
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+            <div class="carousel-indicators">
+                @for (int i = 0; i < sliderImages.Count; i++)
+                {
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="@i"
+                            class="@(i == 0 ? "active" : "")" aria-label="Slide @(i + 1)"></button>
+                }
+            </div>
         </div>
-
-    </div>
+    }
 </section>
 
 <!-- شريط البيو -->
 <div class="hero-bio-strip">
     <div class="container-fluid px-4">
-        <div class="row align-items-center g-3 py-3">
+        <div class="row align-items-center g-3 py-3 flex-nowrap">
 
-            <div class="col-lg-9 col-md-8 text-end">
-                <p class="hero-label mb-1">FOUNDER &amp; DIRECTOR</p>
-                <h2 class="hero-name">د. شيرين شكري</h2>
-                <p class="hero-name-en">Dr. Sherin Shokry</p>
-                <div class="hero-badges mt-2">
+            <div class="col-auto">
+                <img src="/images/dr-sherin.jpeg" alt="د. شيرين شكري"
+                     class="hero-dr-thumb" onerror="this.src='/images/logo.svg'" />
+            </div>
+
+            <div class="col text-end">
+                <p class="hero-label mb-0">FOUNDER &amp; DIRECTOR</p>
+                <h2 class="hero-name mb-0">د. شيرين شكري</h2>
+                <p class="hero-name-en mb-1">Dr. Sherin Shokry</p>
+                <div class="hero-badges">
                     <span class="hero-badge"><i class="fas fa-music ms-1"></i> بيانو وكلارنيت</span>
                     <span class="hero-badge"><i class="fas fa-graduation-cap ms-1"></i> ماجستير موسيقى</span>
                     <span class="hero-badge"><i class="fas fa-globe ms-1"></i> خبرة دولية</span>
@@ -68,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-4 d-flex gap-2 justify-content-center flex-wrap align-items-center">
+            <div class="col-auto d-flex gap-2 flex-wrap justify-content-center">
                 <a asp-action="CV" class="btn-gold px-4 py-2">
                     <i class="fas fa-user-tie ms-1"></i> السيرة الذاتية
                 </a>
