@@ -9,7 +9,12 @@
     --dark-2: #1a1a1a;
     --dark-3: #222222;
     --text-light: #f0e6d3;
-    --text-muted: #888;
+    --text-muted: #aaa;
+}
+
+/* Override Bootstrap text-muted for dark theme */
+.text-muted {
+    color: #aaa !important;
 }
 
 * {
