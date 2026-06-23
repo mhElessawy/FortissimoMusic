@@ -10,19 +10,47 @@ namespace Fortissimo.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<HomeController> _logger;
+        private readonly IWebHostEnvironment _env;
 
-        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger, IWebHostEnvironment env)
         {
             _context = context;
             _logger = logger;
+            _env = env;
         }
 
         public async Task<IActionResult> Index()
         {
-            var sliderImages = await _context.SliderImages
+            var dbSliderImages = await _context.SliderImages
                 .Where(s => s.IsActive)
                 .OrderBy(s => s.Order)
                 .ToListAsync();
+
+            var staticImages = new List<SliderImage>();
+            var imagesFolder = Path.Combine(_env.WebRootPath, "images");
+            string[] extensions = { ".jpg", ".jpeg", ".png", ".webp" };
+
+            for (int i = 1; i <= 9; i++)
+            {
+                foreach (var ext in extensions)
+                {
+                    var filePath = Path.Combine(imagesFolder, $"{i}{ext}");
+                    if (System.IO.File.Exists(filePath))
+                    {
+                        staticImages.Add(new SliderImage
+                        {
+                            Id = -i,
+                            Title = $"Fortissimo Music Academy",
+                            ImageUrl = $"/images/{i}{ext}",
+                            Order = i,
+                            IsActive = true
+                        });
+                        break;
+                    }
+                }
+            }
+
+            var sliderImages = staticImages.Any() ? staticImages : dbSliderImages;
 
             var upcomingEvents = await _context.Events
                 .Where(e => e.IsActive && e.EventDate >= DateTime.Now)
