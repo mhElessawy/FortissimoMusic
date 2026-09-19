@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Fortissimo",
+      "runtimeExecutable": "dotnet",
+      "runtimeArgs": ["run", "--project", "Fortissimo.csproj", "--launch-profile", "https"],
+      "port": 7186,
+      "url": "https://localhost:7186"
+    }
+  ]
+}

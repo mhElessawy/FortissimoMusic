@@ -7,7 +7,7 @@
     <title>@ViewData["Title"] - Fortissimo Music</title>
 
     <!-- Bootstrap RTL -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <!-- Google Fonts Arabic -->
@@ -88,11 +88,11 @@
                     <div class="d-flex align-items-center gap-2 mb-3 justify-content-end">
                         <div>
                             <h5 class="text-gold mb-0">Fortissimo Music</h5>
-                            <small class="text-muted">Fortissimo Music Academy</small>
+                            <small class="text-muted">Fortissimo Music </small>
                         </div>
                         <img src="/images/logo.svg" alt="Fortissimo" height="60" class="rounded-circle" />
                     </div>
-                    <p class="text-muted">أكاديمية موسيقية متخصصة في تعليم البيانو والكلارنيت، نسعى لنشر الثقافة الموسيقية وتطوير مواهب الطلاب.</p>
+                    <p class="text-muted">متخصصين في تعليم البيانو والكلارنيت، نسعى لنشر الثقافة الموسيقية وتطوير مواهب الطلاب.</p>
                 </div>
                 <div class="col-lg-2 col-md-6 text-end">
                     <h6 class="text-gold mb-3">روابط سريعة</h6>
@@ -109,7 +109,7 @@
                     <ul class="list-unstyled" style="color:#ddd;">
                         <li class="mb-3">
                             <i class="fas fa-phone text-gold ms-2" style="font-size:1rem;"></i>
-                            <span style="font-size:1rem; font-weight:600;">+20 100 000 0000</span>
+                            <span style="font-size:1rem; font-weight:600;" dir="ltr">+965 94933940</span>
                         </li>
                         <li class="mb-3">
                             <i class="fas fa-envelope text-gold ms-2" style="font-size:1rem;"></i>
@@ -117,20 +117,19 @@
                         </li>
                         <li class="mb-3">
                             <i class="fas fa-map-marker-alt text-gold ms-2" style="font-size:1rem;"></i>
-                            <span style="font-size:1rem;">القاهرة، مصر</span>
+                            <span style="font-size:1rem;">الكويت</span>
                         </li>
                     </ul>
                     <div class="social-links mt-3">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                        
+                        <a href="https://www.instagram.com/learn_musickw?igsh=MWFjNDRoNzRhaHRnbg%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@@dr.sherinshoukry?_r=1&_t=ZS-97pk1pBRhdx" target="_blank" rel="noopener noreferrer" class="social-link"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h6 class="text-gold mb-3 text-end">موقعنا على الخريطة</h6>
                     <div class="map-container rounded overflow-hidden">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.6!2d31.2357!3d30.0444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDAyJzM5LjkiTiAzMcKwMTQnMDguNSJF!5e0!3m2!1sar!2seg!4v1234567890"
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d231.30!2d47.9774!3d29.3759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf9cb3b7ad1aad%3A0x3e2a2f5de95e7d98!2sKuwait%20City%2C%20Kuwait!5e0!3m2!1sar!2skw!4v1750000000000!5m2!1sar!2skw"
                                 width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade" title="موقعنا على الخريطة">
                         </iframe>
@@ -145,7 +144,7 @@
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -11,18 +11,22 @@ namespace Fortissimo.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _env;
+        private readonly ILogger<AdminController> _logger;
 
-        public AdminController(ApplicationDbContext context, IWebHostEnvironment env)
+        public AdminController(ApplicationDbContext context, IWebHostEnvironment env, ILogger<AdminController> logger)
         {
             _context = context;
             _env = env;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
         {
             ViewBag.EventsCount = await _context.Events.CountAsync();
             ViewBag.MessagesCount = await _context.ContactMessages.Where(m => !m.IsRead).CountAsync();
-            ViewBag.SliderCount = await _context.SliderImages.CountAsync();
+
+            ViewBag.PhotosCount = await _context.GalleryPhotos.CountAsync();
+            ViewBag.VideosCount = await _context.VideoClips.CountAsync();
             return View();
         }
 
@@ -153,6 +157,172 @@ namespace Fortissimo.Controllers
                 TempData["Success"] = "تم حذف الصورة.";
             }
             return RedirectToAction(nameof(SliderImages));
+        }
+
+        // ===== GALLERY PHOTOS =====
+        public async Task<IActionResult> GalleryPhotos()
+        {
+            var photoDir = Path.Combine(_env.WebRootPath, "images", "photo");
+            if (Directory.Exists(photoDir))
+            {
+                var dbFileNames = (await _context.GalleryPhotos.Select(p => p.FileName).ToListAsync())
+                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
+                string[] imgExts = { ".jpg", ".jpeg", ".png", ".webp", ".gif" };
+                var newFiles = Directory.GetFiles(photoDir)
+                    .Where(f => imgExts.Contains(Path.GetExtension(f).ToLower()))
+                    .Select(Path.GetFileName)
+                    .Where(f => !dbFileNames.Contains(f!))
+                    .ToList();
+                if (newFiles.Any())
+                {
+                    int maxOrder = await _context.GalleryPhotos.MaxAsync(p => (int?)p.Order) ?? 0;
+                    foreach (var file in newFiles)
+                    {
+                        _context.GalleryPhotos.Add(new GalleryPhoto
+                        {
+                            FileName = file!,
+                            Order = ++maxOrder,
+                            UploadedAt = DateTime.Now
+                        });
+                    }
+                    await _context.SaveChangesAsync();
+                }
+            }
+            var photos = await _context.GalleryPhotos.OrderBy(p => p.Order).ToListAsync();
+            return View(photos);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadGalleryPhoto(IFormFile imageFile, string? title, int order = 0)
+        {
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                try
+                {
+                    var uploadsDir = Path.Combine(_env.WebRootPath, "images", "photo");
+                    Directory.CreateDirectory(uploadsDir);
+                    var ext = Path.GetExtension(imageFile.FileName).ToLower();
+                    var fileName = Guid.NewGuid() + ext;
+                    var filePath = Path.Combine(uploadsDir, fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await imageFile.CopyToAsync(stream);
+                    }
+
+                    _context.GalleryPhotos.Add(new GalleryPhoto
+                    {
+                        FileName = fileName,
+                        Title = title,
+                        Order = order,
+                        UploadedAt = DateTime.Now
+                    });
+                    await _context.SaveChangesAsync();
+                    TempData["Success"] = "تم رفع الصورة بنجاح!";
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Failed to upload gallery photo.");
+                    TempData["Error"] = "فشل رفع الصورة: " + ex.Message;
+                }
+            }
+            return RedirectToAction(nameof(GalleryPhotos));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteGalleryPhoto(int id)
+        {
+            var photo = await _context.GalleryPhotos.FindAsync(id);
+            if (photo != null)
+            {
+                var filePath = Path.Combine(_env.WebRootPath, "images", "photo", photo.FileName);
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
+                _context.GalleryPhotos.Remove(photo);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "تم حذف الصورة.";
+            }
+            return RedirectToAction(nameof(GalleryPhotos));
+        }
+
+        // ===== VIDEO CLIPS =====
+        public async Task<IActionResult> Videos()
+        {
+            var videoDir = Path.Combine(_env.WebRootPath, "Vedio");
+            if (Directory.Exists(videoDir))
+            {
+                var dbFileNames = (await _context.VideoClips.Select(v => v.FileName).ToListAsync())
+                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
+                string[] vidExts = { ".mp4", ".webm", ".ogg", ".mov", ".avi" };
+                var newFiles = Directory.GetFiles(videoDir)
+                    .Where(f => vidExts.Contains(Path.GetExtension(f).ToLower()))
+                    .Select(Path.GetFileName)
+                    .Where(f => !dbFileNames.Contains(f!))
+                    .ToList();
+                if (newFiles.Any())
+                {
+                    int maxOrder = await _context.VideoClips.MaxAsync(v => (int?)v.Order) ?? 0;
+                    foreach (var file in newFiles)
+                    {
+                        _context.VideoClips.Add(new VideoClip
+                        {
+                            FileName = file!,
+                            Title = Path.GetFileNameWithoutExtension(file!),
+                            Order = ++maxOrder,
+                            UploadedAt = DateTime.Now
+                        });
+                    }
+                    await _context.SaveChangesAsync();
+                }
+            }
+            var videos = await _context.VideoClips.OrderBy(v => v.Order).ToListAsync();
+            return View(videos);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UploadVideo(IFormFile videoFile, string title, string? description, int order = 0)
+        {
+            if (videoFile != null && videoFile.Length > 0)
+            {
+                var uploadsDir = Path.Combine(_env.WebRootPath, "Vedio");
+                Directory.CreateDirectory(uploadsDir);
+                var ext = Path.GetExtension(videoFile.FileName).ToLower();
+                var fileName = Guid.NewGuid() + ext;
+                var filePath = Path.Combine(uploadsDir, fileName);
+                using var stream = new FileStream(filePath, FileMode.Create);
+                await videoFile.CopyToAsync(stream);
+
+                _context.VideoClips.Add(new VideoClip
+                {
+                    FileName = fileName,
+                    Title = title,
+                    Description = description,
+                    Order = order,
+                    UploadedAt = DateTime.Now
+                });
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "تم رفع الفيديو بنجاح!";
+            }
+            return RedirectToAction(nameof(Videos));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteVideo(int id)
+        {
+            var video = await _context.VideoClips.FindAsync(id);
+            if (video != null)
+            {
+                var filePath = Path.Combine(_env.WebRootPath, "Vedio", video.FileName);
+                if (System.IO.File.Exists(filePath))
+                    System.IO.File.Delete(filePath);
+                _context.VideoClips.Remove(video);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "تم حذف الفيديو.";
+            }
+            return RedirectToAction(nameof(Videos));
         }
 
         // ===== MESSAGES =====

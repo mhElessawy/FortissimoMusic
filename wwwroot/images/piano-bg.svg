@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" width="860" height="420">
+  <defs>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(201,168,76,0.20)"/>
+      <stop offset="100%" style="stop-color:rgba(201,168,76,0.05)"/>
+    </linearGradient>
+    <linearGradient id="lidGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:rgba(201,168,76,0.12)"/>
+      <stop offset="100%" style="stop-color:rgba(201,168,76,0.28)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ============================================================ -->
+  <!-- GRAND PIANO — front/3‑quarter view                          -->
+  <!-- ============================================================ -->
+
+  <!-- Body back panel -->
+  <path d="M 60,260  Q 55,180 80,120  Q 120,50 300,30  Q 480,10 580,60  L 580,260 Z"
+        fill="url(#bodyGrad)"
+        stroke="rgba(201,168,76,0.30)" stroke-width="1.5" stroke-linejoin="round"/>
+
+  <!-- Lid (open — rising to the left) -->
+  <path d="M 60,260  Q 55,180 80,120  Q 120,50 300,30  Q 480,10 580,60
+           L 565,25   Q 460,-10 295,-5  Q 95,15 35,100  Q 8,155 15,240 Z"
+        fill="url(#lidGrad)"
+        stroke="rgba(201,168,76,0.38)" stroke-width="1.5" stroke-linejoin="round"/>
+
+  <!-- Lid prop stick -->
+  <line x1="560" y1="25" x2="530" y2="80"
+        stroke="rgba(201,168,76,0.55)" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Lid hinge line -->
+  <line x1="60" y1="260" x2="580" y2="260"
+        stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+
+  <!-- Keyboard housing -->
+  <rect x="60" y="260" width="520" height="100" rx="4"
+        fill="rgba(201,168,76,0.08)"
+        stroke="rgba(201,168,76,0.30)" stroke-width="1.5"/>
+
+  <!-- White key separators (14 keys) -->
+  <line x1="97"  y1="260" x2="97"  y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+  <line x1="134" y1="260" x2="134" y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+  <line x1="171" y1="260" x2="171" y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+  <line x1="208" y1="260" x2="208" y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+  <line x1="245" y1="260" x2="245" y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+  <line x1="282" y1="260" x2="282" y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+  <line x1="319" y1="260" x2="319" y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+  <line x1="356" y1="260" x2="356" y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+  <line x1="393" y1="260" x2="393" y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+  <line x1="430" y1="260" x2="430" y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+  <line x1="467" y1="260" x2="467" y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+  <line x1="504" y1="260" x2="504" y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+  <line x1="541" y1="260" x2="541" y2="355" stroke="rgba(201,168,76,0.22)" stroke-width="1"/>
+
+  <!-- Black keys -->
+  <rect x="79"  y="260" width="22" height="58" rx="2" fill="rgba(201,168,76,0.26)"/>
+  <rect x="116" y="260" width="22" height="58" rx="2" fill="rgba(201,168,76,0.26)"/>
+  <rect x="190" y="260" width="22" height="58" rx="2" fill="rgba(201,168,76,0.26)"/>
+  <rect x="227" y="260" width="22" height="58" rx="2" fill="rgba(201,168,76,0.26)"/>
+  <rect x="264" y="260" width="22" height="58" rx="2" fill="rgba(201,168,76,0.26)"/>
+  <rect x="338" y="260" width="22" height="58" rx="2" fill="rgba(201,168,76,0.26)"/>
+  <rect x="375" y="260" width="22" height="58" rx="2" fill="rgba(201,168,76,0.26)"/>
+  <rect x="449" y="260" width="22" height="58" rx="2" fill="rgba(201,168,76,0.26)"/>
+  <rect x="486" y="260" width="22" height="58" rx="2" fill="rgba(201,168,76,0.26)"/>
+  <rect x="523" y="260" width="22" height="58" rx="2" fill="rgba(201,168,76,0.26)"/>
+
+  <!-- Piano legs -->
+  <rect x="80"  y="355" width="12" height="55" rx="3" fill="rgba(201,168,76,0.18)"/>
+  <rect x="550" y="355" width="12" height="55" rx="3" fill="rgba(201,168,76,0.18)"/>
+  <rect x="300" y="355" width="12" height="42" rx="3" fill="rgba(201,168,76,0.18)"/>
+
+  <!-- Brand label area on body -->
+  <rect x="220" y="190" width="160" height="7" rx="3" fill="rgba(201,168,76,0.14)"/>
+
+  <!-- ============================================================ -->
+  <!-- CLARINET — right side, vertical                              -->
+  <!-- ============================================================ -->
+
+  <!-- Mouthpiece -->
+  <path d="M 720,8 Q 728,6 736,8 L 738,38 L 718,38 Z"
+        fill="rgba(201,168,76,0.28)" stroke="rgba(201,168,76,0.40)" stroke-width="1"/>
+  <rect x="723" y="12" width="10" height="24"
+        fill="rgba(201,168,76,0.14)" stroke="rgba(201,168,76,0.28)" stroke-width="0.5"/>
+
+  <!-- Barrel -->
+  <rect x="717" y="38" width="24" height="42" rx="3"
+        fill="rgba(201,168,76,0.16)" stroke="rgba(201,168,76,0.38)" stroke-width="1"/>
+  <!-- Barrel rings -->
+  <line x1="717" y1="52" x2="741" y2="52" stroke="rgba(201,168,76,0.40)" stroke-width="1.5"/>
+  <line x1="717" y1="68" x2="741" y2="68" stroke="rgba(201,168,76,0.40)" stroke-width="1.5"/>
+
+  <!-- Upper joint -->
+  <rect x="715" y="80" width="28" height="110" rx="3"
+        fill="rgba(201,168,76,0.14)" stroke="rgba(201,168,76,0.36)" stroke-width="1"/>
+
+  <!-- Upper joint tone holes -->
+  <circle cx="729" cy="100" r="5" fill="none" stroke="rgba(201,168,76,0.50)" stroke-width="1.5"/>
+  <circle cx="729" cy="118" r="5" fill="none" stroke="rgba(201,168,76,0.50)" stroke-width="1.5"/>
+  <circle cx="729" cy="136" r="5" fill="none" stroke="rgba(201,168,76,0.50)" stroke-width="1.5"/>
+  <circle cx="729" cy="154" r="5" fill="none" stroke="rgba(201,168,76,0.50)" stroke-width="1.5"/>
+  <!-- Side keys upper -->
+  <rect x="700" y="96"  width="14" height="4" rx="2" fill="rgba(201,168,76,0.38)"/>
+  <rect x="744" y="130" width="14" height="4" rx="2" fill="rgba(201,168,76,0.38)"/>
+
+  <!-- Joint ring -->
+  <rect x="714" y="188" width="30" height="8" rx="2"
+        fill="rgba(201,168,76,0.22)" stroke="rgba(201,168,76,0.40)" stroke-width="1"/>
+
+  <!-- Lower joint -->
+  <rect x="715" y="196" width="28" height="110" rx="3"
+        fill="rgba(201,168,76,0.14)" stroke="rgba(201,168,76,0.36)" stroke-width="1"/>
+
+  <!-- Lower joint tone holes -->
+  <circle cx="729" cy="218" r="5" fill="none" stroke="rgba(201,168,76,0.50)" stroke-width="1.5"/>
+  <circle cx="729" cy="238" r="5" fill="none" stroke="rgba(201,168,76,0.50)" stroke-width="1.5"/>
+  <circle cx="729" cy="258" r="5" fill="none" stroke="rgba(201,168,76,0.50)" stroke-width="1.5"/>
+  <circle cx="729" cy="278" r="5" fill="none" stroke="rgba(201,168,76,0.50)" stroke-width="1.5"/>
+  <!-- Side keys lower -->
+  <rect x="700" y="214" width="14" height="4" rx="2" fill="rgba(201,168,76,0.38)"/>
+  <rect x="744" y="248" width="14" height="4" rx="2" fill="rgba(201,168,76,0.38)"/>
+  <rect x="700" y="272" width="14" height="4" rx="2" fill="rgba(201,168,76,0.38)"/>
+
+  <!-- Bell -->
+  <path d="M 712,306 Q 708,350 704,375 Q 700,395 729,402 Q 758,395 754,375 Q 750,350 746,306 Z"
+        fill="rgba(201,168,76,0.16)" stroke="rgba(201,168,76,0.38)" stroke-width="1"/>
+  <!-- Bell ring -->
+  <ellipse cx="729" cy="306" rx="17" ry="4"
+           fill="rgba(201,168,76,0.22)" stroke="rgba(201,168,76,0.40)" stroke-width="1"/>
+
+  <!-- Musical notes -->
+  <text x="630" y="90"  font-size="52" fill="rgba(201,168,76,0.11)" font-family="serif">𝄞</text>
+  <text x="648" y="210" font-size="34" fill="rgba(201,168,76,0.09)" font-family="serif">♪</text>
+  <text x="625" y="320" font-size="38" fill="rgba(201,168,76,0.08)" font-family="serif">♫</text>
+</svg>

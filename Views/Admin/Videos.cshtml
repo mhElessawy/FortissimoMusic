@@ -1,0 +1,81 @@
+@using Fortissimo.Models
+@model List<VideoClip>
+@{
+    ViewData["Title"] = "إدارة الفيديوهات";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="text-gold"><i class="fas fa-video ms-2"></i> اللقطات الموسيقية</h3>
+</div>
+
+<!-- رفع فيديو جديد -->
+<div class="admin-card mb-4">
+    <h5 class="text-gold mb-3"><i class="fas fa-upload ms-2"></i> رفع فيديو جديد</h5>
+    <form asp-action="UploadVideo" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label text-muted">ملف الفيديو <span class="text-danger">*</span></label>
+                <input type="file" name="videoFile" class="form-control" accept="video/*" required />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label text-muted">العنوان <span class="text-danger">*</span></label>
+                <input type="text" name="title" class="form-control" placeholder="عنوان الفيديو" required />
+            </div>
+            <div class="col-md-3">
+                <label class="form-label text-muted">الوصف (اختياري)</label>
+                <input type="text" name="description" class="form-control" placeholder="وصف مختصر" />
+            </div>
+            <div class="col-md-1">
+                <label class="form-label text-muted">الترتيب</label>
+                <input type="number" name="order" class="form-control" value="0" min="0" />
+            </div>
+            <div class="col-md-1 d-flex align-items-end">
+                <button type="submit" class="btn btn-gold w-100">
+                    <i class="fas fa-upload"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- قائمة الفيديوهات -->
+@if (!Model.Any())
+{
+    <div class="text-center py-5 text-muted">
+        <i class="fas fa-video" style="font-size:3rem; opacity:0.3;"></i>
+        <p class="mt-3">لا توجد فيديوهات بعد. ارفع أول فيديو!</p>
+    </div>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var video in Model)
+        {
+            <div class="col-md-6">
+                <div class="admin-card">
+                    <video controls class="w-100 rounded mb-2" style="max-height:200px;">
+                        <source src="/Vedio/@video.FileName" />
+                    </video>
+                    <h6 class="text-gold text-end mb-1">@video.Title</h6>
+                    @if (!string.IsNullOrEmpty(video.Description))
+                    {
+                        <p class="text-muted small text-end mb-2">@video.Description</p>
+                    }
+                    <div class="d-flex justify-content-between align-items-center">
+                        <form asp-action="DeleteVideo" method="post"
+                              onsubmit="return confirm('هل تريد حذف هذا الفيديو؟')">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@video.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash ms-1"></i> حذف
+                            </button>
+                        </form>
+                        <small class="text-muted">ترتيب: @video.Order</small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

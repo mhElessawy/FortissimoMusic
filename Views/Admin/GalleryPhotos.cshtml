@@ -1,0 +1,75 @@
+@using Fortissimo.Models
+@model List<GalleryPhoto>
+@{
+    ViewData["Title"] = "إدارة صور المعرض";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="text-gold"><i class="fas fa-images ms-2"></i> صور المعرض</h3>
+</div>
+
+<!-- رفع صورة جديدة -->
+<div class="admin-card mb-4">
+    <h5 class="text-gold mb-3"><i class="fas fa-upload ms-2"></i> رفع صورة جديدة</h5>
+    <form asp-action="UploadGalleryPhoto" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <div class="row g-3">
+            <div class="col-md-5">
+                <label class="form-label text-muted">الصورة <span class="text-danger">*</span></label>
+                <input type="file" name="imageFile" class="form-control" accept="image/*" required />
+            </div>
+            <div class="col-md-4">
+                <label class="form-label text-muted">العنوان (اختياري)</label>
+                <input type="text" name="title" class="form-control" placeholder="عنوان الصورة" />
+            </div>
+            <div class="col-md-2">
+                <label class="form-label text-muted">الترتيب</label>
+                <input type="number" name="order" class="form-control" value="0" min="0" />
+            </div>
+            <div class="col-md-1 d-flex align-items-end">
+                <button type="submit" class="btn btn-gold w-100">
+                    <i class="fas fa-upload"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- قائمة الصور -->
+@if (!Model.Any())
+{
+    <div class="text-center py-5 text-muted">
+        <i class="fas fa-images" style="font-size:3rem; opacity:0.3;"></i>
+        <p class="mt-3">لا توجد صور بعد. ارفع أول صورة!</p>
+    </div>
+}
+else
+{
+    <div class="row g-3">
+        @foreach (var photo in Model)
+        {
+            <div class="col-md-3 col-sm-4 col-6">
+                <div class="admin-card p-0 overflow-hidden position-relative">
+                    <img src="/images/photo/@photo.FileName" alt="@(photo.Title ?? photo.FileName)"
+                         class="w-100" style="height:180px; object-fit:cover;" />
+                    <div class="p-2">
+                        @if (!string.IsNullOrEmpty(photo.Title))
+                        {
+                            <p class="text-gold mb-1 small fw-bold text-end">@photo.Title</p>
+                        }
+                        <p class="text-muted mb-2 small text-end">ترتيب: @photo.Order</p>
+                        <form asp-action="DeleteGalleryPhoto" method="post"
+                              onsubmit="return confirm('هل تريد حذف هذه الصورة؟')">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@photo.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm w-100">
+                                <i class="fas fa-trash ms-1"></i> حذف
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
